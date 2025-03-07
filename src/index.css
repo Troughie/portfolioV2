@@ -1,10 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import "tailwindcss";
 
 @theme {
   --color-bg: #242424;
 }
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Playfair Display", serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -24,4 +26,30 @@ body {
 
 .text_shadow:hover {
   text-shadow: 1px 1px 0 yellow;
+}
+
+.name_home {
+  @apply after:top-[25px] after:-right-20 after:w-0 after:animate-[loadBar_1.5s_ease-in-out_forwards];
+}
+
+.default_after {
+  @apply after:h-[2px] after:absolute after:bg-yellow-500;
+}
+
+@keyframes loadBar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 75%;
+  }
+}
+
+@keyframes loadBar2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
 }

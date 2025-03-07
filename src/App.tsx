@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Projects from "./components/Projects";
 import Social from "./components/Social";
 import { useHasScrolledFromTop } from "./ultils";
+import About from "./components/About";
 
 function App() {
   const scrolled = useHasScrolledFromTop();
@@ -14,6 +15,7 @@ function App() {
       <div className="relative h-auto flex flex-col justify-center  items-center">
         <Navbar scrolled={scrolled} />
         <Home />
+        <About />
         <Projects />
         <Experience />
         <Contact />

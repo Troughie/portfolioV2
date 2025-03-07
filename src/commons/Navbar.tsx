@@ -133,7 +133,7 @@ const NavbarDesktop = (
           animate={{ opacity: showNav ? 0.5 : 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full h-full fixed top-0 left-0 bg-black z-50"
+          className="w-full h-full fixed top-0 left-0 bg-bg z-50"
         />
       )}
 
