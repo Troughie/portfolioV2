@@ -24,6 +24,10 @@ body {
   overflow-x: hidden;
 }
 
+.loadUnderline {
+  @apply after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:transition-transform after:duration-500 hover:after:scale-x-100 hover:scale-110 duration-500;
+}
+
 .text_shadow:hover {
   text-shadow: 1px 1px 0 yellow;
 }

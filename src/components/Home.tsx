@@ -1,3 +1,4 @@
+import { animateSlowLoad } from "../Constant";
 import { Github, Linkedin } from "../assets/icons";
 import { motion as m } from "framer-motion";
 interface props {
@@ -61,7 +62,10 @@ const Home = () => {
       <div className="grid grid-cols-4 grid-rows-5 gap-4">
         <div className="row-span-2">
           <p className="text-4xl font-semibold relative">
-            <m.span {...animateLeft} className="name_home block relative">
+            <m.span
+              {...animateLeft}
+              className="name_home default_after block relative"
+            >
               Nguyen
             </m.span>
             <m.span
@@ -88,22 +92,7 @@ const Home = () => {
             <ul className="text-end text-2xl">
               {itemLi.map(({ name, id }) => {
                 return (
-                  <m.li
-                    initial={{
-                      x: -330,
-                      opacity: 0,
-                    }}
-                    animate={{
-                      x: 0,
-                      opacity: 1,
-                    }}
-                    transition={{
-                      duration: 0.3 * id,
-                      ease: "easeInOut",
-                    }}
-                    key={id}
-                    className="odd:py-4"
-                  >
+                  <m.li {...animateSlowLoad(id)} key={id} className="odd:py-4">
                     {name}
                   </m.li>
                 );

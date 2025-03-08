@@ -21,3 +21,20 @@ export const navbarItems: navbarItem[] = [
     id: 4,
   },
 ];
+
+export const animateSlowLoad = (id: number) => {
+  return {
+    initial: {
+      x: -330,
+      opacity: 0,
+    },
+    animate: {
+      x: 0,
+      opacity: 1,
+    },
+    transition: {
+      duration: 0.3 * id,
+      ease: "easeInOut",
+    },
+  };
+};

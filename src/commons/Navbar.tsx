@@ -102,8 +102,7 @@ const NavbarDesktop = (
             {navbarItems.map(({ id, name }) => (
               <m.li
                 {...animate(id)}
-                className="cursor-pointer font-bold relative after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-500 after:origin-left after:scale-x-0 after:transition-transform after:duration-500 hover:after:scale-x-100
-            text_shadow hover:scale-110 duration-500
+                className="cursor-pointer font-bold relative after:bg-blue-500 text_shadow loadUnderline
             "
                 key={id}
               >
