@@ -16,8 +16,8 @@ function App() {
         <Navbar scrolled={scrolled} />
         <Home />
         <About />
-        <Projects />
         <Experience />
+        <Projects />
         <Contact />
         <Social />
       </div>

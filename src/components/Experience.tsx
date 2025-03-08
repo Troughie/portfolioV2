@@ -1,7 +1,11 @@
-import React from "react";
+import BreakCumb from "../commons/BreakCumb";
 
 const Experience = () => {
-  return <div>Experience</div>;
+  return (
+    <div className="h-screen px-8">
+      <BreakCumb name="Skill & Experience" />
+    </div>
+  );
 };
 
 export default Experience;
