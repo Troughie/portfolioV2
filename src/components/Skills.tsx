@@ -1,4 +1,7 @@
+import { useRef } from "react";
+import BreakCumb from "../commons/BreakCumb";
 import CardSkill from "../commons/CardSkill";
+import { useInView, motion as m } from "framer-motion";
 
 interface SkillType {
   type: string;
@@ -38,40 +41,72 @@ const skills: SkillType[] = [
   },
 ];
 const Skills = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false });
+
   const calLengthElement = (index: number) => {
-    if (index === 0) return "";
-
-    const lengthArray = skills.length;
-    const midPoint = Math.ceil(lengthArray / 2);
-
-    if (index < midPoint) {
-      return `col-start-${index * 2 + 1}`;
+    if (index === 4) {
+      return "col-start-3";
     }
+    return "";
+  };
 
-    const positions = {
-      5: "row-start-2 col-start-4",
-      6: "row-start-2 col-start-7",
-    };
-
-    return positions[index as keyof typeof positions] || "";
+  const initialBase = (index: number) => {
+    const left = [0, 3, 5];
+    const center = [1, 6];
+    const right = [2, 4];
+    if (left.includes(index)) {
+      return { x: -500, opacity: 0 };
+    }
+    if (right.includes(index)) {
+      return {
+        x: 500,
+        opacity: 0,
+      };
+    }
+    if (center.includes(index)) {
+      if (index === 1) {
+        return {
+          y: -500,
+          opacity: 0,
+        };
+      } else {
+        return {
+          y: 500,
+          opacity: 0,
+        };
+      }
+    }
+    return {};
   };
   return (
-    <div className="h-screen px-8 w-full relative flex flex-col justify-around">
-      <div className="grid grid-cols-8 grid-rows-2 gap-4">
+    <div className="relative flex h-screen w-full flex-col justify-center px-8">
+      <div
+        ref={ref}
+        className="grid w-full grid-cols-3 gap-x-4 gap-y-10 md:h-full md:gap-4"
+      >
         {skills.map(({ details, type }, index) => {
+          initialBase(index);
           return (
-            <CardSkill
+            <m.div
               key={index}
-              details={details}
-              type={type}
-              className={`col-span-2 ${calLengthElement(index)}`}
-            />
+              initial={{ ...initialBase(index) }}
+              animate={isInView ? { x: 0, y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.3 * index }}
+              className="flex h-full w-full items-center justify-center"
+            >
+              <CardSkill
+                details={details}
+                type={type}
+                className={`${calLengthElement(index)}`}
+              />
+            </m.div>
           );
         })}
+        <div className="col-start-2 row-start-2 grid place-items-center">
+          <BreakCumb name="Skills" className="text-2xl font-bold" />
+        </div>
       </div>
-      {/* <div className="relative flex justify-center">
-        <BreakCumb name="Skills" className="text-2xl font-bold" />
-      </div> */}
     </div>
   );
 };

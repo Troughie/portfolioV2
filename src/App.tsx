@@ -13,12 +13,12 @@ function App() {
   const scrolled = useHasScrolledFromTop();
   return (
     <AnimatePresence mode="wait">
-      <div className="relative h-auto flex flex-col justify-center  items-center">
+      <div className="relative flex h-auto min-w-[300px] flex-col items-center justify-center">
         <Navbar scrolled={scrolled} />
         <Home />
         <About />
-        <Skills />
         <Experience />
+        <Skills />
         <Projects />
         <Contact />
         <Social />

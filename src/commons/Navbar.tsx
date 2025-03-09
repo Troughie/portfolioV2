@@ -17,12 +17,12 @@ const Navbar = ({ scrolled }: props) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
         className={cn(
-          "flex  pb-2 pt-4 px-2 md:px-10 bg-bg md:pt-8 max-w-full justify-between items-center w-screen sticky top-0 z-10",
-          scrolled && "shadow-white shadow-lg"
+          "bg-bg sticky top-0 z-10 flex w-screen max-w-full min-w-screen items-center justify-between px-2 pt-4 pb-2 md:px-10 md:pt-8",
+          scrolled && "shadow-lg shadow-white",
         )}
       >
-        <div className="flex gap-2 items-center">
-          <img src="" alt="" className="size-20 bg-white rounded-full" />
+        <div className="flex items-center gap-2">
+          <img src="" alt="" className="size-20 rounded-full bg-white" />
           <span>Tngoc</span>
         </div>
         {NavbarDesktop(showNav, setShowNav)}
@@ -33,7 +33,7 @@ const Navbar = ({ scrolled }: props) => {
 
 const NavbarDesktop = (
   showNav: boolean,
-  setShowNav: (showNav: boolean) => void
+  setShowNav: (showNav: boolean) => void,
 ) => {
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState<boolean>(true);
@@ -68,7 +68,7 @@ const NavbarDesktop = (
         };
       }
     },
-    [showNav, isDesktop]
+    [showNav, isDesktop],
   );
 
   useEffect(() => {
@@ -76,23 +76,23 @@ const NavbarDesktop = (
       case w < 768:
         setClassName(
           cn(
-            `absolute top-1/2 left-[50%] translate-x-[-50%] z-100 justify-between
-            flex flex-col gap-4 text-end opacity-100`
-          )
+            `absolute top-1/2 right-[5%] translate-x-[-50%] z-100 justify-between
+            flex flex-col gap-4 text-end opacity-100`,
+          ),
         );
         setIsDesktop(false);
         break;
       case w >= 768:
         setShowNav(false);
         setClassName(
-          "flex px-4 gap-4 text-sm md:text-2xl items-center justify-around"
+          "flex px-4 gap-4 text-sm md:text-2xl items-center justify-around",
         );
         setIsDesktop(true);
         break;
       default:
         break;
     }
-  }, [w, showNav]);
+  }, [w, showNav, setShowNav]);
 
   return (
     <>
@@ -102,25 +102,17 @@ const NavbarDesktop = (
             {navbarItems.map(({ id, name }) => (
               <m.li
                 {...animate(id)}
-                className="cursor-pointer font-bold relative after:bg-blue-500 text_shadow loadUnderline
-            "
+                className="text_shadow loadUnderline relative inline-block cursor-pointer font-bold after:bg-blue-500"
                 key={id}
               >
                 {name}
               </m.li>
             ))}
-            <m.a
-              {...animate(navbarItems.length + 1)}
-              className="text-blue-400 hover:underline duration-300 block md:hidden"
-              href="mailto:ngocnguyen29061@gmail.com"
-            >
-              ngocnguyen29061@gmail.com
-            </m.a>
           </m.ul>
         )}
       </AnimatePresence>
       <a
-        className="text-blue-400 hover:underline duration-300 hidden lg:block"
+        className="hidden text-blue-400 duration-300 hover:underline lg:block"
         href="mailto:ngocnguyen29061@gmail.com"
       >
         ngocnguyen29061@gmail.com
@@ -132,19 +124,20 @@ const NavbarDesktop = (
           animate={{ opacity: showNav ? 0.5 : 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full h-full fixed top-0 left-0 bg-bg z-50"
+          onClick={() => setShowNav(false)}
+          className="bg-bg fixed top-0 left-0 z-50 h-full w-full"
         />
       )}
 
-      <div className="block md:hidden z-100">
+      <div className="z-100 block md:hidden">
         {showNav ? (
           <Close
-            className="size-8 text-white"
+            className="size-8 cursor-pointer text-white"
             onClick={() => setShowNav(!showNav)}
           />
         ) : (
           <Bars
-            className="size-8 text-white"
+            className="size-8 cursor-pointer text-white"
             onClick={() => setShowNav(!showNav)}
           />
         )}

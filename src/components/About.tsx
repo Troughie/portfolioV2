@@ -21,16 +21,26 @@ const socialList: props[] = [
     id: 2,
   },
 ];
+
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
+
+  const animateEaseText = {
+    initial: { y: 100, opacity: 0 },
+    animate: isInView ? { y: 0, opacity: 1 } : {}, // Định nghĩa hợp lệ
+    transition: { duration: 1, ease: "easeOut" },
+  };
   return (
-    <div ref={ref} className="h-screen px-8 relative w-full">
+    <div className="relative h-screen w-full px-8">
       <BreakCumb name="About" />
 
-      <div className="absolute left-8 right-8 top-20 bottom-0 rounded-md opacity-70 bg-gradient-to-t from-[#242424] to-[#121212]">
+      <div
+        ref={ref}
+        className="absolute top-20 right-8 bottom-0 left-8 rounded-md bg-gradient-to-t from-[#242424] to-[#121212] opacity-70"
+      >
         <div
-          className="w-full h-full"
+          className="h-full w-full"
           style={{
             backgroundImage: `url(${Wave})`,
             backgroundPosition: "center",
@@ -38,23 +48,19 @@ const About = () => {
             backgroundSize: "cover",
           }}
         />
-        <div className="w-3/4 h-2/3 blur-sm backdrop-blur-xl absolute top-[200px] -left-[270px] translate-x-1/2" />
-        <div className="w-3/4 h-2/3 absolute text-white top-[200px] left-[250px] px-4 grid grid-cols-6 grid-rows-5 gap-4">
+        <div className="absolute top-[50%] left-[50%] h-2/3 w-full -translate-1/2 blur-sm backdrop-blur-xl md:w-3/4" />
+        <div className="absolute top-[50%] left-[50%] grid h-2/3 w-full -translate-1/2 grid-cols-6 grid-rows-6 gap-4 px-4 text-center text-white md:w-3/4 md:grid-rows-5">
           <m.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="col-span-3 row-span-3 col-start-1 row-start-2 flex flex-col gap-20 text-white"
+            {...animateEaseText}
+            className="col-span-6 row-span-2 row-start-1 grid place-items-center gap-20 text-white md:col-span-3 md:row-start-2"
           >
-            <h1 className="text-4xl font-extrabold">I'm nguyen tien ngoc</h1>
-            <span className="font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              numquam odit at esse amet architecto, ab soluta a sequi repellat
-              non qui vero dicta unde, dolorem voluptate. Impedit, cupiditate
-              iure?
-            </span>
+            <h1 className="text-lg font-extrabold md:text-2xl">
+              The efforts of an anonymous good person are like underground
+              water, silently making the ground green.
+            </h1>
           </m.div>
-          <div className="row-span-3 text-yellow-300 font-bold col-span-2 col-start-5 row-start-3">
+
+          <div className="col-span-6 col-start-1 row-span-1 row-start-5 line-clamp-1 grid place-items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-2">
             <ul>
               {socialList.map(({ id, name, icon }) => {
                 const hrf = id === 2 ? `mailto:${name}` : `tel:${name}`;
@@ -67,10 +73,10 @@ const About = () => {
                   >
                     <a
                       href={hrf}
-                      className="flex gap-4 justify-start items-center"
+                      className="flex w-full items-center justify-start gap-4"
                     >
-                      {icon}{" "}
-                      <span className="inline-block relative after:bg-amber-400 loadUnderline">
+                      {icon}
+                      <span className="loadUnderline relative inline-block after:bg-amber-400">
                         {name}
                       </span>
                     </a>
@@ -79,6 +85,14 @@ const About = () => {
               })}
             </ul>
           </div>
+          <m.span
+            {...animateEaseText}
+            className="col-span-6 col-start-1 row-start-3 grid place-items-center font-semibold md:col-span-3 md:row-start-4"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+            numquam odit at esse amet architecto, ab soluta a sequi repellat non
+            qui vero dicta unde, dolorem voluptate. Impedit, cupiditate iure?
+          </m.span>
         </div>
       </div>
     </div>
