@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import Social from "./components/Social";
 import { useHasScrolledFromTop } from "./ultils";
 import About from "./components/About";
+import Skills from "./components/Skills";
 
 function App() {
   const scrolled = useHasScrolledFromTop();
@@ -16,6 +17,7 @@ function App() {
         <Navbar scrolled={scrolled} />
         <Home />
         <About />
+        <Skills />
         <Experience />
         <Projects />
         <Contact />

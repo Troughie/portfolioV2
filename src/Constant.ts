@@ -3,6 +3,11 @@ interface navbarItem {
   id: number;
 }
 
+export interface defaultProps {
+  index: number;
+  values: string;
+}
+
 export const navbarItems: navbarItem[] = [
   {
     name: "Home",
