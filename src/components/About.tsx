@@ -1,9 +1,9 @@
 import { ReactNode, useRef } from "react";
 import { animateSlowLoad } from "../Constant";
 import { Wave } from "../assets";
-import BreakCumb from "../commons/BreakCumb";
 import { motion as m, useInView } from "framer-motion";
 import { Mail, Phone } from "../assets/icons";
+import BreadCrumb from "../commons/BreadCrumb";
 interface props {
   name: string;
   id: number;
@@ -33,20 +33,17 @@ const About = () => {
   };
   return (
     <div id="About" className="relative min-h-screen w-full px-8">
-      <BreakCumb name="About" />
+      <BreadCrumb name="About" />
       <div
         ref={ref}
-        className="absolute inset-0 flex items-center justify-center rounded-md bg-gradient-to-t from-[#242424] to-[#121212] opacity-70"
+        className="relative bottom-0 min-h-screen w-full rounded-md bg-gradient-to-t from-[#242424] to-[#121212] opacity-70"
+        style={{
+          backgroundImage: `url(${Wave})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `url(${Wave})`,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        />
         <div className="absolute top-[50%] left-[50%] h-2/3 w-full -translate-1/2 blur-sm backdrop-blur-xl md:w-3/4" />
         <div className="absolute top-[50%] left-[50%] grid w-full -translate-1/2 grid-cols-1 gap-4 px-4 text-center text-white sm:w-3/4 sm:grid-cols-6">
           <m.div

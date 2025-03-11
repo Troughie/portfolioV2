@@ -3,6 +3,7 @@
 
 @theme {
   --color-bg: #242424;
+  --color-primary: #00b7c7;
 }
 
 :root {

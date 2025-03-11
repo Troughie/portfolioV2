@@ -1,110 +1,82 @@
-import { useRef } from "react";
-import BreakCumb from "../commons/BreakCumb";
-import CardSkill from "../commons/CardSkill";
-import { useInView, motion as m } from "framer-motion";
+import { ReactNode } from "react";
+import { Check, Light, Setting } from "../assets/icons";
+import Divider from "../commons/Divider";
 
-interface SkillType {
-  type: string;
-  details: string;
+interface Title {
+  name: string;
+  icon: ReactNode;
 }
-
-const skills: SkillType[] = [
-  {
-    type: "Programming Languages",
-    details: "JavaScript (ES6+), TypeScript, PHP, Java, C#",
-  },
-  {
-    type: "Backend Development",
-    details:
-      "Node.js (Express.js, NestJS), PHP (Laravel), C# (ASP.NET Core), Java (Spring Boot)",
-  },
-  {
-    type: "Frontend Development",
-    details:
-      "React.js (Redux, Redux Toolkit,Zustand), HTML, CSS, TailwindCSS, jQuery",
-  },
-  {
-    type: "Database Management",
-    details: "MySQL, MongoDB, SQL Server",
-  },
-  {
-    type: "ORM & Query Builders",
-    details: "Sequelize, Sequelize-CLI, Entity Framework,Mongoose",
-  },
-  {
-    type: "API & Integration",
-    details: "RESTful API, Postman, Redis Caching",
-  },
-  {
-    type: "Development Tools & Workflow",
-    details: "GitHub,Jira, Agile Methodology",
-  },
-];
+interface ToolsAndKnow {
+  title: Title;
+  techs: string[];
+}
 const Skills = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false });
-
-  const calLengthElement = (index: number) => {
-    if (index === 4) {
-      return "col-start-3";
-    }
-    return "";
-  };
-
-  const initialBase = (index: number) => {
-    const left = [0, 3, 5];
-    const center = [1, 6];
-    const right = [2, 4];
-    if (left.includes(index)) {
-      return { x: -500, opacity: 0 };
-    }
-    if (right.includes(index)) {
-      return {
-        x: 500,
-        opacity: 0,
-      };
-    }
-    if (center.includes(index)) {
-      if (index === 1) {
-        return {
-          y: -500,
-          opacity: 0,
-        };
-      } else {
-        return {
-          y: 500,
-          opacity: 0,
-        };
-      }
-    }
-    return {};
-  };
+  const Developers = [
+    "Javascript",
+    "Html",
+    "css",
+    "tailwind",
+    "NodeJs",
+    "ExpressJs",
+    "NestJs",
+    "Java",
+    "Php",
+    "Asp .net",
+  ];
+  const Tools: ToolsAndKnow[] = [
+    {
+      title: { icon: <Setting />, name: "Tools" },
+      techs: [
+        "Git + Github",
+        "Command line",
+        "PostMan",
+        "Chrome Devtools",
+        "Jira",
+      ],
+    },
+    {
+      title: { icon: <Light />, name: "Knowledge" },
+      techs: ["CSS Detangling", "ECMAScript 6", "Usability", "SEO"],
+    },
+  ];
   return (
-    <div className="relative flex h-screen w-full flex-col justify-center px-8">
-      <div
-        ref={ref}
-        className="grid w-full grid-cols-3 gap-x-4 gap-y-10 md:h-full md:gap-4"
-      >
-        {skills.map(({ details, type }, index) => {
-          initialBase(index);
-          return (
-            <m.div
-              key={index}
-              initial={{ ...initialBase(index) }}
-              animate={isInView ? { x: 0, y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.3 * index }}
-              className="flex h-full w-full items-center justify-center"
-            >
-              <CardSkill
-                details={details}
-                type={type}
-                className={`${calLengthElement(index)}`}
-              />
-            </m.div>
-          );
-        })}
-        <div className="col-start-2 row-start-2 grid place-items-center">
-          <BreakCumb name="Skills" className="text-2xl font-bold" />
+    <div className="h-auto w-full px-8 pb-10">
+      <h1 className="text-4xl">Skills</h1>
+      <Divider />
+      <div className="flex flex-wrap justify-between gap-6">
+        <div className="flex max-w-1/2 flex-col gap-6">
+          <h3 className="flex items-center justify-start gap-2">
+            <Setting />
+            <span className="text-lg uppercase">Developer</span>
+          </h3>
+          <ul className="flex flex-wrap gap-4">
+            {Developers.map((e) => (
+              <li
+                key={e}
+                className="grid size-[90px] place-items-center rounded-full border p-4 text-center text-sm"
+              >
+                {e}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex gap-10 font-sans">
+          {Tools.map(({ techs, title }, index) => (
+            <div key={index}>
+              <h3 className="mb-5 flex items-center gap-2 text-lg font-bold uppercase">
+                {title.icon}
+                <span>{title.name}</span>
+              </h3>
+              <ul className="text-sm">
+                {techs.map((tech, index) => (
+                  <li key={index} className="flex items-center gap-2">
+                    <Check className="size-6" />
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </div>

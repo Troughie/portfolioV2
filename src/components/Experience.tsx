@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import BreakCumb from "../commons/BreakCumb";
 import { motion as m, useInView } from "framer-motion";
+import Divider from "../commons/Divider";
 interface tech {
   id: number;
   name: string;
@@ -58,7 +58,8 @@ const Experience = () => {
   const isInView = useInView(ref, { once: false });
   return (
     <div id="Experience" ref={ref} className="min-h-screen w-full px-8">
-      <BreakCumb name="Experience" />
+      <h1 className="text-4xl">Experience</h1>
+      <Divider />
       {experiences.map(
         ({ description, link, name, positions, techs, time }, index) => {
           return (
@@ -83,7 +84,7 @@ const Experience = () => {
                     : {}
                 }
                 transition={{ duration: 1 }}
-                className="z-10 mt-1 mb-2 text-xs font-semibold tracking-wide text-slate-500 uppercase sm:col-span-2"
+                className="z-10 mt-1 mb-2 inline-block w-1/2 text-xs font-semibold tracking-wide text-slate-500 uppercase sm:col-span-2"
                 aria-label="2018 to 2024"
               >
                 {time}
@@ -127,9 +128,9 @@ const Experience = () => {
                             aria-hidden="true"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             ></path>
                           </svg>
                         </span>
@@ -150,7 +151,7 @@ const Experience = () => {
                   aria-label="Technologies used"
                 >
                   {techs.map((tech) => (
-                    <li className="mt-2 mr-1.5">
+                    <li key={tech.name} className="mt-2 mr-1.5">
                       <div className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs leading-5 font-medium text-teal-300">
                         {tech.name}
                       </div>

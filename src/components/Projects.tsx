@@ -1,3 +1,5 @@
+import Button from "../commons/Button";
+import Divider from "../commons/Divider";
 import cn from "../ultils";
 
 interface ProjectProps {
@@ -24,29 +26,28 @@ const Projects = () => {
   return (
     <div className="h-auto min-h-screen px-8">
       <h1 className="text-4xl font-bold">Some of my work</h1>
-      {Projects.map(({ description, img, name, tech }) => (
-        <div className="mt-[100px]">
-          <div className="my-10 h-[2px] w-2/8 bg-blue-400 md:w-1/8" />
+      {Projects.map(({ description, img, name, tech }, index) => (
+        <div key={index} className="mt-[100px]">
+          <Divider />
           <div className="h-full w-full font-sans">
             <div className="relative block w-full">
               <img src={img} alt="" className={cn(`max-h-[450px] w-full`)} />
             </div>
-            <div className="mt-8 ml-4 flex items-center justify-between">
+            <div className="mt-8 ml-4 flex flex-wrap items-center justify-between gap-4">
               <h2 className="text-xl font-bold uppercase">{name}</h2>
               <div className="flex items-center justify-between gap-4">
-                <button className="cursor-pointer rounded-sm border-2 border-[#00b7c7] px-2 py-1 font-sans text-lg font-medium text-[#00b7c7] uppercase duration-300 hover:bg-[#00b7c7] hover:text-white">
-                  Demo
-                </button>
-                <button className="cursor-pointer rounded-sm border-2 border-[#00b7c7] px-2 py-1 font-sans text-lg font-medium text-[#00b7c7] uppercase duration-300 hover:bg-[#00b7c7] hover:text-white">
-                  code
-                </button>
+                <Button name="Demo" />
+                <Button name="Code" />
               </div>
             </div>
             <div className="mt-4 ml-4 flex flex-col gap-4">
               <div>{description}</div>
               <ul className="flex flex-wrap gap-4">
                 {tech.map((t) => (
-                  <li className="rounded-sm border border-[#333] bg-[#333] px-[7px] pt-[7px] pb-[5px] text-[10px] font-medium text-[#777]">
+                  <li
+                    key={t}
+                    className="rounded-sm border border-[#333] bg-[#333] px-[7px] pt-[7px] pb-[5px] text-[10px] font-medium text-[#777]"
+                  >
                     {t}
                   </li>
                 ))}

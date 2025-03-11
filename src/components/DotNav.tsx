@@ -14,7 +14,7 @@ const DotNav = () => {
       )}
     >
       {dots.map((dot) => (
-        <div className="relative right-0 gap-2">
+        <div key={dot} className="relative right-0 gap-2">
           <Link
             to={dot}
             duration={400}

@@ -3,12 +3,15 @@ interface navbarItem {
   id: number;
 }
 
+export const GITHUB_LINK = "https://github.com/Troughie/";
+
 export interface defaultProps {
   index: number;
   values: string;
 }
 export const COLORCONSTANT = {
   active: "rgb(255 255 255 / 25%)",
+  primary: "#00b7c7",
 };
 
 export const navbarItems: navbarItem[] = [
