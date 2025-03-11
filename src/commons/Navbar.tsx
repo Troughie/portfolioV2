@@ -17,7 +17,7 @@ const Navbar = ({ scrolled }: props) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
         className={cn(
-          "bg-bg sticky top-0 z-10 flex w-screen max-w-full min-w-screen items-center justify-between px-2 pt-4 pb-2 md:px-10 md:pt-8",
+          "bg-bg sticky top-0 z-[99] flex w-screen max-w-full min-w-screen items-center justify-between px-2 pt-4 pb-2 md:px-10 md:pt-8",
           scrolled && "shadow-lg shadow-white",
         )}
       >
@@ -125,7 +125,7 @@ const NavbarDesktop = (
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
           onClick={() => setShowNav(false)}
-          className="bg-bg fixed top-0 left-0 z-50 h-full w-full"
+          className={`bg-bg fixed top-0 left-0 z-50 h-full w-full ${isAnimating ? "block" : "hidden"}`}
         />
       )}
 

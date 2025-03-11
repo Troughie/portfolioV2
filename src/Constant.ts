@@ -7,6 +7,9 @@ export interface defaultProps {
   index: number;
   values: string;
 }
+export const COLORCONSTANT = {
+  active: "rgb(255 255 255 / 25%)",
+};
 
 export const navbarItems: navbarItem[] = [
   {

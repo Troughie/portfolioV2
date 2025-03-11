@@ -29,17 +29,19 @@ export const ResizeScreen = () => {
 
 export const useHasScrolledFromTop = () => {
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const [widthScroll, setWidthScroll] = useState<number>(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
+      setWidthScroll(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return scrolled;
+  return { scrolled, widthScroll };
 };
 
 export default function cn(...inputs: ClassValue[]) {

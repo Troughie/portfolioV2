@@ -109,3 +109,54 @@ export function Mail(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function ArrowNext(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      width="1em"
+      height="1em"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M3.704 11.736a.75.75 0 1 0 1.092 1.028l4-4.25a.75.75 0 0 0 0-1.027l-4-4.25a.75.75 0 1 0-1.092 1.028L7.22 8zM11.25 3a.75.75 0 0 1 .75.75v8.5a.75.75 0 0 1-1.5 0v-8.5a.75.75 0 0 1 .75-.75"
+      ></path>
+    </svg>
+  );
+}
+
+export function ArrowPrev(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      width="1em"
+      height="1em"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12.296 11.736a.75.75 0 1 1-1.092 1.028l-4-4.25a.75.75 0 0 1 0-1.027l4-4.25a.75.75 0 1 1 1.092 1.028L8.78 8zM4.75 3a.75.75 0 0 0-.75.75v8.5a.75.75 0 0 0 1.5 0v-8.5A.75.75 0 0 0 4.75 3"
+      ></path>
+    </svg>
+  );
+}
+
+export function ArrowDown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z"
+      ></path>
+    </svg>
+  );
+}

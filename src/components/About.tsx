@@ -32,12 +32,11 @@ const About = () => {
     transition: { duration: 1, ease: "easeOut" },
   };
   return (
-    <div className="relative h-screen w-full px-8">
+    <div id="About" className="relative min-h-screen w-full px-8">
       <BreakCumb name="About" />
-
       <div
         ref={ref}
-        className="absolute top-20 right-8 bottom-0 left-8 rounded-md bg-gradient-to-t from-[#242424] to-[#121212] opacity-70"
+        className="absolute inset-0 flex items-center justify-center rounded-md bg-gradient-to-t from-[#242424] to-[#121212] opacity-70"
       >
         <div
           className="h-full w-full"
@@ -49,18 +48,17 @@ const About = () => {
           }}
         />
         <div className="absolute top-[50%] left-[50%] h-2/3 w-full -translate-1/2 blur-sm backdrop-blur-xl md:w-3/4" />
-        <div className="absolute top-[50%] left-[50%] grid h-2/3 w-full -translate-1/2 grid-cols-6 grid-rows-6 gap-4 px-4 text-center text-white md:w-3/4 md:grid-rows-5">
+        <div className="absolute top-[50%] left-[50%] grid w-full -translate-1/2 grid-cols-1 gap-4 px-4 text-center text-white sm:w-3/4 sm:grid-cols-6">
           <m.div
             {...animateEaseText}
-            className="col-span-6 row-span-2 row-start-1 grid place-items-center gap-20 text-white md:col-span-3 md:row-start-2"
+            className="col-span-6 row-span-2 row-start-1 grid place-items-center gap-20 text-white md:col-span-3"
           >
             <h1 className="text-lg font-extrabold md:text-2xl">
               The efforts of an anonymous good person are like underground
               water, silently making the ground green.
             </h1>
           </m.div>
-
-          <div className="col-span-6 col-start-1 row-span-1 row-start-5 line-clamp-1 grid place-items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-2">
+          <div className="col-span-6 col-start-1 row-span-2 row-start-5 line-clamp-1 grid place-items-center items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-2">
             <ul>
               {socialList.map(({ id, name, icon }) => {
                 const hrf = id === 2 ? `mailto:${name}` : `tel:${name}`;
@@ -69,7 +67,7 @@ const About = () => {
                     {...animateSlowLoad(id)}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     key={id}
-                    className="odd:py-4"
+                    className="font-sans odd:py-4"
                   >
                     <a
                       href={hrf}
