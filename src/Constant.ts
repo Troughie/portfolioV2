@@ -49,3 +49,6 @@ export const animateSlowLoad = (id: number) => {
     },
   };
 };
+
+export const API_URL =
+  "https://script.google.com/macros/s/AKfycbx_Lc7N98cO-PCCwH2-b01b2GaKOSCWOjcSXaanqlMaOgdZbFUOmwDTRPcLt0szcXmf/exec/sheet=experiences";

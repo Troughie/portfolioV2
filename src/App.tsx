@@ -22,8 +22,8 @@ function App() {
     Projects: useRef<HTMLElement | null>(null),
     Contact: useRef<HTMLElement | null>(null),
   };
-  const lastScrollY = useRef(0);
-  const { name, setName } = useViewActive();
+
+  const { setName } = useViewActive();
 
   useEffect(() => {
     const observerOptions = {
@@ -35,7 +35,7 @@ function App() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setName(entry.target.id); // Cập nhật section đang hiển thị
+          setName(entry.target.id);
         }
       });
     };
@@ -56,42 +56,6 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const sectionKeys = Object.keys(sections);
-      const currentIndex = sectionKeys.indexOf(name);
-
-      if (
-        currentScrollY > lastScrollY.current &&
-        currentIndex + 2 < sectionKeys.length
-      ) {
-        sections[
-          sectionKeys[currentIndex + 1] as keyof typeof sections
-        ].current?.scrollIntoView({
-          behavior: "smooth",
-        });
-      } else if (currentScrollY < lastScrollY.current && currentIndex - 1 > 0) {
-        sections[
-          sectionKeys[currentIndex - 1] as keyof typeof sections
-        ].current?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }
-      console.log(sectionKeys.length);
-      console.log(currentIndex);
-      console.log(name);
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("wheel", handleScroll);
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sections]);
 
   return (
     <AnimatePresence>

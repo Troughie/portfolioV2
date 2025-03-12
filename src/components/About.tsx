@@ -51,11 +51,10 @@ const About = () => {
             className="col-span-6 row-span-2 row-start-1 grid place-items-center gap-20 text-white md:col-span-3"
           >
             <h1 className="text-lg font-extrabold md:text-2xl">
-              The efforts of an anonymous good person are like underground
-              water, silently making the ground green.
+              The greatest ideas are the simplest
             </h1>
           </m.div>
-          <div className="col-span-6 col-start-1 row-span-2 row-start-5 line-clamp-1 grid place-items-center items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-2">
+          <div className="col-span-6 col-start-1 row-span-2 row-start-5 line-clamp-1 grid place-items-center items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-1">
             <ul>
               {socialList.map(({ id, name, icon }) => {
                 const hrf = id === 2 ? `mailto:${name}` : `tel:${name}`;
@@ -71,7 +70,7 @@ const About = () => {
                       className="flex w-full items-center justify-start gap-4"
                     >
                       {icon}
-                      <span className="loadUnderline relative inline-block after:bg-amber-400">
+                      <span className="loadUnderline relative inline-block after:bg-yellow-400">
                         {name}
                       </span>
                     </a>
@@ -82,11 +81,24 @@ const About = () => {
           </div>
           <m.span
             {...animateEaseText}
-            className="col-span-6 col-start-1 row-start-3 grid place-items-center font-semibold md:col-span-3 md:row-start-4"
+            className="col-span-6 col-start-1 row-start-3 grid place-items-center font-semibold md:row-start-4"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-            numquam odit at esse amet architecto, ab soluta a sequi repellat non
-            qui vero dicta unde, dolorem voluptate. Impedit, cupiditate iure?
+            Hello! I am a Software Engineer with one year of experience in
+            software development. I am proficient in both backend and frontend
+            development, specializing in ReactJs,Nodejs(ExpressJs).
+            <span>
+              I am passionate about building efficient applications with
+              optimized performance and great user experiences. I have developed
+              various real-world projects, including restaurant management
+              systems, e-commerce platforms, financial management applications,
+              and real-time chat features.
+            </span>{" "}
+            <span>
+              Always eager to learn new technologies, I strive to work in a
+              challenging and creative environment to enhance my skills. If
+              you're looking for a dedicated and responsible developer, feel
+              free to reach out to me!
+            </span>
           </m.span>
         </div>
       </div>

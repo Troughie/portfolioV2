@@ -1,6 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion as m, useInView } from "framer-motion";
 import Divider from "../commons/Divider";
+
+import axios from "axios";
+import { API_URL } from "../Constant";
+
 interface tech {
   id: number;
   name: string;
@@ -34,26 +38,11 @@ const experiences: Experience[] = [
       { id: 8, name: "NodeJs" },
     ],
   },
-  {
-    name: "Ebizworld",
-    link: "https://ebizworldsolutions.com/",
-    description:
-      "  Build, style, and ship high-quality websites, design systems, mobile apps, and digital experiences for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more. Provide leadership within engineering department through close collaboration, knowledge shares, and spearheading the development of internal tools.",
-    time: "Mar — Sep 2024",
-    positions: ["Backend", "Frontend"],
-    techs: [
-      { id: 1, name: "NestJs" },
-      { id: 2, name: "ReactJs" },
-      { id: 3, name: "TailwindCss" },
-      { id: 4, name: "Antd" },
-      { id: 5, name: "Typescript" },
-      { id: 6, name: "Javascript" },
-      { id: 7, name: "Mongodb" },
-      { id: 8, name: "NodeJs" },
-    ],
-  },
 ];
 const Experience = () => {
+  useEffect(() => {
+    axios.get(API_URL).then((result) => console.log(result));
+  }, []);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
   return (
