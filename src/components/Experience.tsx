@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion as m, useInView } from "framer-motion";
 import Divider from "../commons/Divider";
-
-import axios from "axios";
-import { API_URL } from "../Constant";
 
 interface tech {
   id: number;
@@ -24,7 +21,9 @@ const experiences: Experience[] = [
     name: "Ebizworld",
     link: "https://ebizworldsolutions.com/",
     description:
-      "  Build, style, and ship high-quality websites, design systems, mobile apps, and digital experiences for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more. Provide leadership within engineering department through close collaboration, knowledge shares, and spearheading the development of internal tools.",
+      "Developed backend using NestJS, MongoDB, and TypeScript, building high-performance APIs and optimizing data structures." +
+      "Built frontend with ReactJS, TailwindCSS, Ant Design, and TypeScript, ensuring a smooth and visually appealing user experience." +
+      "Contributed to the development of a strategy card game web application, working on system architecture, performance optimization, and user experience improvements.",
     time: "Mar — Sep 2024",
     positions: ["Backend", "Frontend"],
     techs: [
@@ -40,9 +39,6 @@ const experiences: Experience[] = [
   },
 ];
 const Experience = () => {
-  useEffect(() => {
-    axios.get(API_URL).then((result) => console.log(result));
-  }, []);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
   return (
@@ -126,8 +122,8 @@ const Experience = () => {
                       </span>
                     </a>
                   </div>
-                  {positions.map((pos) => (
-                    <div key={pos}>
+                  {positions.map((pos, index) => (
+                    <div key={index}>
                       <div className="text-slate-500" aria-hidden="true">
                         {pos}
                       </div>

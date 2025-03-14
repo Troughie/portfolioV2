@@ -40,7 +40,7 @@ const Skills = () => {
     },
   ];
   return (
-    <div className="h-auto w-full px-8 pb-10">
+    <div className="min-h-screen w-full px-8 pb-10">
       <h1 className="text-4xl">Skills</h1>
       <Divider />
       <div className="flex flex-wrap justify-between gap-6">
@@ -61,15 +61,15 @@ const Skills = () => {
           </ul>
         </div>
         <div className="flex gap-10 font-sans">
-          {Tools.map(({ techs, title }, index) => (
-            <div key={index}>
+          {Tools.map(({ techs, title }) => (
+            <div key={title.name}>
               <h3 className="mb-5 flex items-center gap-2 text-lg font-bold uppercase">
                 {title.icon}
                 <span>{title.name}</span>
               </h3>
               <ul className="text-sm">
-                {techs.map((tech, index) => (
-                  <li key={index} className="flex items-center gap-2">
+                {techs.map((tech) => (
+                  <li key={tech} className="flex items-center gap-2">
                     <Check className="size-6" />
                     {tech}
                   </li>

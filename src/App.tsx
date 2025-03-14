@@ -6,12 +6,13 @@ import About from "./components/About";
 import HomeV2 from "./components/HomeV2";
 import DotNav from "./components/DotNav";
 import { useEffect, useRef } from "react";
-import { useViewActive } from "./store";
+import { useIsLoading, useViewActive } from "./store";
 import Footer from "./components/Footer";
 import Skills from "./components/Skills";
 import BoxLink from "./commons/BoxLink";
 import { Download, Github } from "./assets/icons";
 import { GITHUB_LINK } from "./Constant";
+import CheckLoading from "./commons/CheckLoading";
 
 function App() {
   const sections = {
@@ -24,6 +25,8 @@ function App() {
   };
 
   const { setName } = useViewActive();
+
+  const { isLoading } = useIsLoading();
 
   useEffect(() => {
     const observerOptions = {
@@ -60,6 +63,11 @@ function App() {
   return (
     <AnimatePresence>
       <DotNav />
+      {isLoading && (
+        <div className="fixed z-[99999] grid h-screen w-screen place-items-center bg-black opacity-75">
+          <CheckLoading />
+        </div>
+      )}
       <div className="relative mx-auto flex h-auto min-h-screen max-w-screen-lg flex-col items-center justify-center md:px-6">
         <section id="Intro" ref={sections.Intro}>
           <HomeV2 />

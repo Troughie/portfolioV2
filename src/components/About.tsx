@@ -48,13 +48,13 @@ const About = () => {
         <div className="absolute top-[50%] left-[50%] grid w-full -translate-1/2 grid-cols-1 gap-4 px-4 text-center text-white sm:w-3/4 sm:grid-cols-6">
           <m.div
             {...animateEaseText}
-            className="col-span-6 row-span-2 row-start-1 grid place-items-center gap-20 text-white md:col-span-3"
+            className="col-span-6 row-span-2 row-start-6 grid place-items-center gap-20 text-white md:col-span-3"
           >
             <h1 className="text-lg font-extrabold md:text-2xl">
               The greatest ideas are the simplest
             </h1>
           </m.div>
-          <div className="col-span-6 col-start-1 row-span-2 row-start-5 line-clamp-1 grid place-items-center items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-1">
+          <div className="col-span-6 col-start-1 row-span-2 row-start-5 line-clamp-1 grid place-items-center items-center overflow-hidden font-bold overflow-ellipsis text-yellow-300 md:col-span-2 md:col-start-5 md:row-start-6">
             <ul>
               {socialList.map(({ id, name, icon }) => {
                 const hrf = id === 2 ? `mailto:${name}` : `tel:${name}`;
@@ -81,7 +81,7 @@ const About = () => {
           </div>
           <m.span
             {...animateEaseText}
-            className="col-span-6 col-start-1 row-start-3 grid place-items-center font-semibold md:row-start-4"
+            className="col-span-6 col-start-1 row-span-5 row-start-1 grid place-items-center font-semibold"
           >
             Hello! I am a Software Engineer with one year of experience in
             software development. I am proficient in both backend and frontend

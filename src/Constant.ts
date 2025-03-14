@@ -51,4 +51,4 @@ export const animateSlowLoad = (id: number) => {
 };
 
 export const API_URL =
-  "https://script.google.com/macros/s/AKfycbx_Lc7N98cO-PCCwH2-b01b2GaKOSCWOjcSXaanqlMaOgdZbFUOmwDTRPcLt0szcXmf/exec/sheet=experiences";
+  "https://api.sheetbest.com/sheets/fbd78936-be94-4a6b-b160-7c0050c1e2b4";

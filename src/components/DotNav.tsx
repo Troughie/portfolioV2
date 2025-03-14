@@ -3,7 +3,14 @@ import { useViewActive } from "../store";
 import cn from "../ultils";
 
 const DotNav = () => {
-  const dots = ["Intro", "About", "Experience", "Projects", "Contact"];
+  const dots = [
+    "Intro",
+    "About",
+    "Skills",
+    "Experiences",
+    "Projects",
+    "Contact",
+  ];
   const { name } = useViewActive();
   return (
     <div

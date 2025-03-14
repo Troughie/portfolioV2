@@ -15,18 +15,18 @@ const Projects = () => {
   const Projects: ProjectProps[] = [
     {
       description:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat est laudantium repellendus eveniet voluptatibus alias quaerat sed odio labore, placeat possimus laboriosam facere necessitatibus vel maiores ullam quidem impedit esse",
+        " Using reactJs tailwind firebase to build a quiz game app, you can create a quiz invite friend to join, doing some quiz of friend",
       name: "Quiz game",
       tech: ["ReactJs", "TailwindCss", "FireBase"],
       img: "https://plus.unsplash.com/premium_photo-1689976326559-b2bce4efeb62?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      link: "",
-      demo: "",
+      link: "#",
+      demo: "#",
     },
   ];
   return (
     <div className="h-auto min-h-screen px-8">
       <h1 className="text-4xl font-bold">Some of my work</h1>
-      {Projects.map(({ description, img, name, tech }, index) => (
+      {Projects.map(({ description, img, name, tech, demo, link }, index) => (
         <div key={index} className="mt-[100px]">
           <Divider />
           <div className="h-full w-full font-sans">
@@ -36,8 +36,12 @@ const Projects = () => {
             <div className="mt-8 ml-4 flex flex-wrap items-center justify-between gap-4">
               <h2 className="text-xl font-bold uppercase">{name}</h2>
               <div className="flex items-center justify-between gap-4">
-                <Button name="Demo" />
-                <Button name="Code" />
+                <a href={demo}>
+                  <Button name="Demo" />
+                </a>
+                <a href={link}>
+                  <Button name="Code" />
+                </a>
               </div>
             </div>
             <div className="mt-4 ml-4 flex flex-col gap-4">

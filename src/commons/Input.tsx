@@ -2,16 +2,28 @@ interface props {
   name: string;
   required: boolean;
   isTextArea?: boolean;
+  onChange: (e: React.ChangeEvent) => void;
+  input: string;
 }
-const Input = ({ isTextArea = false, name, required }: props) => {
+const Input = ({
+  input,
+  isTextArea = false,
+  name,
+  required,
+  onChange,
+}: props) => {
   return (
     <div className="relative my-5 flex w-full flex-col md:w-1/2">
       {isTextArea ? (
         <textarea
           className="peer border-b border-[#707070] focus:ring-0 focus:outline-none"
           id={name}
+          required={required}
           name={name}
+          value={input}
+          title="Please let me know what you would like."
           rows={2}
+          onChange={(e) => onChange(e)}
           cols={10}
         ></textarea>
       ) : (
@@ -20,6 +32,8 @@ const Input = ({ isTextArea = false, name, required }: props) => {
           name={name}
           required={required}
           autoComplete="off"
+          value={input}
+          onChange={(e) => onChange(e)}
           pattern={
             name === "email"
               ? "[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$"
