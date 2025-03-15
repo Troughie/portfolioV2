@@ -96,7 +96,9 @@ function App() {
         <BoxLink
           name="View my resume"
           icon={<Download className="size-8" />}
-          link={""}
+          link={
+            "https://www.topcv.vn/xem-cv/UQJSVwUAAAIEAgQGXVNQBF0BUlEHBlVQB1QHVQd3d0"
+          }
         />
         <section
           className="relative h-full w-full"
