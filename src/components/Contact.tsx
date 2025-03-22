@@ -11,7 +11,8 @@ interface FormType {
   message: string;
 }
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL =
+  "https://api.sheetbest.com/sheets/fbd78936-be94-4a6b-b160-7c0050c1e2b4";
 const Contact = () => {
   const [form, setForm] = useState<FormType>({
     email: "",
