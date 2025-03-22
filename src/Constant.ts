@@ -49,6 +49,3 @@ export const animateSlowLoad = (id: number) => {
     },
   };
 };
-
-export const API_URL =
-  "https://api.sheetbest.com/sheets/fbd78936-be94-4a6b-b160-7c0050c1e2b4";

@@ -14,3 +14,6 @@ export { default as KSmall } from "./img/kolv-small.png";
 export { default as CLarge } from "./img/cake-large.png";
 export { default as CMedium } from "./img/cake-medium.png";
 export { default as CSmall } from "./img/cake-small.png";
+export { default as PLarge } from "./img/portfolio-large.png";
+export { default as PMedium } from "./img/portfolio-medium.png";
+export { default as PSmall } from "./img/portfolio-small.png";

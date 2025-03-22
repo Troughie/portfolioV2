@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../commons/Button";
 import Divider from "../commons/Divider";
 import Input from "../commons/Input";
 import axios from "axios";
-import { API_URL } from "../Constant";
 import { useIsLoading } from "../store";
 interface FormType {
   name: string;
@@ -12,6 +11,7 @@ interface FormType {
   message: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
 const Contact = () => {
   const [form, setForm] = useState<FormType>({
     email: "",
@@ -21,14 +21,12 @@ const Contact = () => {
   });
 
   const { setIsLoading } = useIsLoading();
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
 
   const handleChange = (field: keyof FormType, value: string) => {
     setForm((prev) => ({
       ...prev,
       [field]: value, // Cập nhật state ngay lập tức
+      time: new Date(),
     }));
   };
 

@@ -43,7 +43,7 @@ const Skills = () => {
     <div className="min-h-screen w-full px-8 pb-10">
       <h1 className="text-4xl">Skills</h1>
       <Divider />
-      <div className="flex flex-wrap justify-between gap-6">
+      <div className="flex w-full flex-wrap justify-between gap-6">
         <div className="flex max-w-1/2 flex-col gap-6">
           <h3 className="flex items-center justify-start gap-2">
             <Setting />

@@ -14,6 +14,9 @@ import {
   CLarge,
   CMedium,
   CSmall,
+  PLarge,
+  PMedium,
+  PSmall,
 } from "../assets";
 interface ProjectProps {
   name: string;
@@ -27,6 +30,20 @@ interface ProjectProps {
 
 const Projects = () => {
   const Projects: ProjectProps[] = [
+    {
+      description: "This is my portfolio :))",
+      name: "Portfolio",
+      tech: [
+        "ReactJs",
+        "TailwindCss",
+        "FireBase",
+        "Typescript",
+        "Framer-motion",
+        "Zustand",
+      ],
+      img: [PLarge, PMedium, PSmall],
+      link: "https://github.com/Troughie/portfolioV2",
+    },
     {
       description:
         "This is a project I worked on during my internship. It was my first time joining a real-world project, so I learned a lot—from optimizing hooks to using Mongoose efficiently. Although I finished my internship before the project was completed, it helped me gain valuable experience. Since this is a real-world project and hasn't been released yet, I can't share the link or the code publicly.",
