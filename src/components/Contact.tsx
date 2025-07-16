@@ -1,51 +1,49 @@
-import { useState } from "react";
 import Button from "../commons/Button";
 import Divider from "../commons/Divider";
 import Input from "../commons/Input";
-import axios from "axios";
+import { useForm, ValidationError } from "@formspree/react";
 import { useIsLoading } from "../store";
-interface FormType {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+import { useEffect } from "react";
+import { useState } from "react";
+const AlertSuccess = () => {
+  const [visible, setVisible] = useState(true);
 
-const API_URL =
-  "https://api.sheetbest.com/sheets/fbd78936-be94-4a6b-b160-7c0050c1e2b4";
+  if (!visible) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="animate-fade-in w-full max-w-sm rounded-2xl bg-white px-8 py-6 text-center shadow-xl">
+        <h2 className="mb-2 text-xl font-semibold text-green-600">
+          Message Sent Successfully
+        </h2>
+        <p className="mb-4 text-gray-700">
+          Thank you for reaching out. I’ll get back to you as soon as possible
+          via your email.
+        </p>
+
+        <button
+          onClick={() => setVisible(false)}
+          className="mt-4 inline-block rounded-full bg-green-600 px-6 py-2 font-medium text-white transition-colors hover:bg-green-700"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
 const Contact = () => {
-  const [form, setForm] = useState<FormType>({
-    email: "",
-    message: "",
-    name: "",
-    subject: "",
-  });
-
+  const [state, handleSubmit] = useForm("xldlewlj");
+  const InputArray = ["name", "email", "subject", "message"];
   const { setIsLoading } = useIsLoading();
 
-  const handleChange = (field: keyof FormType, value: string) => {
-    setForm((prev) => ({
-      ...prev,
-      [field]: value, // Cập nhật state ngay lập tức
-      time: new Date(),
-    }));
-  };
+  useEffect(() => {
+    setIsLoading(state.submitting);
+  }, [setIsLoading, state.submitting]);
 
-  const submitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-    axios.post(API_URL, form);
-    setIsLoading(true);
-    setForm({
-      email: "",
-      message: "",
-      name: "",
-      subject: "",
-    });
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  };
-  const InputArray = ["name", "email", "subject", "message"];
+  if (state.succeeded) {
+    return <AlertSuccess />;
+  }
+
   return (
     <div className="relative h-auto w-full px-8">
       <div className="flex w-full flex-col items-center justify-between">
@@ -57,24 +55,22 @@ const Contact = () => {
         </h4>
       </div>
       <form
-        onSubmit={(e) => submitForm(e)}
+        onSubmit={handleSubmit}
         className="mt-10 grid w-full place-items-center"
       >
         {InputArray.map((i) => (
-          <Input
-            isTextArea={i === "message"}
-            required={true}
-            name={i}
-            input={form[i as keyof FormType]}
-            onChange={(e) =>
-              handleChange(
-                i as keyof FormType,
-                (e.target as HTMLInputElement).value,
-              )
-            }
-          />
+          <>
+            <Input isTextArea={i === "message"} required={true} name={i} />
+            <ValidationError prefix={i} field={i} errors={state.errors} />
+          </>
         ))}
-        <Button name="Send message" className="mt-4 px-3 py-2" />
+
+        <Button
+          disabled={state.submitting}
+          type="submit"
+          name="Send message"
+          className="mt-4 px-3 py-2"
+        />
       </form>
     </div>
   );
