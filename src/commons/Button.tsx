@@ -3,10 +3,15 @@ import cn from "../ultils";
 interface props {
   name: string;
   className?: string;
-  type: "submit" | "reset" | "button";
-  disabled: boolean;
+  type?: "submit" | "reset" | "button";
+  disabled?: boolean;
 }
-const Button = ({ name, className, type = "submit", disabled }: props) => {
+const Button = ({
+  name,
+  className,
+  type = "submit",
+  disabled = false,
+}: props) => {
   return (
     <button
       type={type}
