@@ -7,7 +7,7 @@ interface DotNavProps {
   setCurrentSection: (index: number) => void;
 }
 
-const DotNav = ({ currentSection, setCurrentSection }: DotNavProps) => {
+const DotNav = ({  setCurrentSection }: DotNavProps) => {
   const dots = [
     "Intro",
     "About",

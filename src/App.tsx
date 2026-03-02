@@ -83,7 +83,7 @@ function App() {
 
     if (!isDesktop) return;
 
-    let scrollTimeout: NodeJS.Timeout;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
 
     const handleWheel = (e: WheelEvent) => {
       if (isScrolling) return;
