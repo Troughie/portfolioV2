@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
     "@tailwindcss/vite": "^4.0.10",
     "antd": "^5.24.3",
     "axios": "^1.8.3",
@@ -21,6 +23,7 @@
     "react-dom": "^19.0.0",
     "react-scroll": "^1.9.3",
     "tailwind-merge": "^3.0.2",
+    "three": "^0.183.1",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

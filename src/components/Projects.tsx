@@ -1,6 +1,7 @@
+import { useRef, useState } from "react";
 import Button from "../commons/Button";
-import Divider from "../commons/Divider";
 import cn from "../ultils";
+import { motion as m, useInView, AnimatePresence } from "framer-motion";
 import {
   FanLarge,
   FanMedium,
@@ -18,6 +19,7 @@ import {
   PMedium,
   PSmall,
 } from "../assets";
+
 interface ProjectProps {
   name: string;
   description: string;
@@ -29,7 +31,12 @@ interface ProjectProps {
 }
 
 const Projects = () => {
-  const Projects: ProjectProps[] = [
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [activeProject, setActiveProject] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const ProjectsList: ProjectProps[] = [
     {
       description: "This is my portfolio :))",
       name: "Portfolio",
@@ -46,7 +53,7 @@ const Projects = () => {
     },
     {
       description:
-        "This is a project I worked on during my internship. It was my first time joining a real-world project, so I learned a lot—from optimizing hooks to using Mongoose efficiently. Although I finished my internship before the project was completed, it helped me gain valuable experience. Since this is a real-world project and hasn't been released yet, I can't share the link or the code publicly.",
+        "This is a project I worked on during my internship. It was my first time joining a real-world project, so I learned a lot—from optimizing hooks to using Mongoose efficiently.",
       name: "Kolv game web",
       tech: [
         "ReactJs",
@@ -62,7 +69,7 @@ const Projects = () => {
     },
     {
       description:
-        "This is my graduation project. I'm not quite satisfied with it yet, in terms of performance, design, and its overall results. In this application, you can manage your expenses, list your income and expenses for the month, and it will automatically calculate the remaining balance. You can also create a monthly budget and share it with your family for easier management. It also uses Firebase for real-time chat, allowing you to communicate with those who share the wallet. I haven't hosted it yet, so it's just a code demo for now :))",
+        "This is my graduation project. In this application, you can manage your expenses, list your income and expenses for the month, and it will automatically calculate the remaining balance.",
       name: "Money lover",
       tech: [
         "ReactJs",
@@ -81,15 +88,15 @@ const Projects = () => {
     },
     {
       description:
-        "My second project is an e-commerce website built using PHP and Laravel for development, with MySQL as the database. It was a two-person project, and while it's not polished enough to be a fully completed product, it still gave me valuable experience with PHP—even though I prefer JavaScript.",
-      name: "Money lover",
+        "My second project is an e-commerce website built using PHP and Laravel for development, with MySQL as the database.",
+      name: "Cake Shop",
       tech: ["Php", "Laravel", "Mysql", "Jquery", "Javascript", "Bootstrap"],
       img: [CLarge, CMedium, CSmall],
       link: "https://github.com/Troughie/apcake",
     },
     {
       description:
-        "This is my first website made in school, using simple html and css with bootstrap to design the interface, jquery to do the page loading, it's simple but i'm happy that i and my friends completed it.",
+        "This is my first website made in school, using simple html and css with bootstrap to design the interface.",
       name: "Fanimation",
       tech: ["html", "css", "jquery", "bootstrap"],
       img: [FanLarge, FanMedium, FanSmall],
@@ -97,67 +104,248 @@ const Projects = () => {
     },
   ];
 
-  return (
-    <div className="h-auto min-h-screen px-8">
-      <h1 className="text-4xl font-bold">Some of my work</h1>
-      {Projects.map(
-        ({ description, img, name, tech, demo, link, backendLink }, index) => (
-          <div key={index} className="mt-[100px]">
-            <Divider />
-            <div className="h-full w-full font-sans">
-              <div className="relative h-[450px] w-full">
-                {img.map((e, index) => (
-                  <img
-                    key={index}
-                    src={e}
-                    alt=""
-                    className={cn(
-                      `absolute max-h-[450px] z-${index + 1} right-0 bottom-0 object-cover transition-opacity duration-500`,
-                      index === 0 && "left-0 h-full w-[80%]",
-                      index === 1 && "right-10 h-[60%] md:h-[80%]",
-                      index === 2 && "h-[50%] md:h-[70%]",
-                    )}
-                  />
-                ))}
-              </div>
-              <div className="mt-8 ml-4 flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-xl font-bold uppercase">{name}</h2>
-                <div className="flex items-center justify-between gap-4">
-                  {demo && (
-                    <a href={demo} target="_blank">
-                      <Button name="Demo" />
-                    </a>
-                  )}
-                  {link && (
-                    <a href={link} target="_blank">
-                      <Button name="Code" />
-                    </a>
-                  )}
-                  {backendLink && (
-                    <a href={backendLink} target="_blank">
-                      <Button name="Backend" />
-                    </a>
-                  )}
-                </div>
-              </div>
+  const paginate = (newDirection: number) => {
+    if (!ProjectsList.length) return;
 
-              <div className="mt-4 ml-4 flex flex-col gap-4">
-                <div>{description}</div>
-                <ul className="flex flex-wrap gap-4">
-                  {tech.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-sm border border-[#333] bg-[#333] px-[7px] pt-[7px] pb-[5px] text-[10px] font-medium text-[#777]"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    setDirection(newDirection);
+    setActiveProject((prev) => {
+      const next = prev + newDirection;
+
+      if (next < 0) return ProjectsList.length - 1;
+      if (next >= ProjectsList.length) return 0;
+
+      return next;
+    });
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 260 : -260,
+      opacity: 0,
+      scale: 0.96,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 260 : -260,
+      opacity: 0,
+      scale: 0.96,
+    }),
+  };
+
+  const project = ProjectsList[activeProject];
+
+  return (
+    <div 
+      ref={ref}
+      className="flex min-h-screen w-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+    >
+      <div className="mx-auto w-full max-w-7xl">
+        {/* Header */}
+        <m.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-4 text-center sm:mb-8"
+        >
+          <h1 
+            className="mb-3 text-3xl font-bold sm:mb-4 sm:text-4xl lg:text-5xl"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Featured Projects
+          </h1>
+          <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary"></div>
+        </m.div>
+
+        {/* Horizontal Scroll Container */}
+        <div className="relative pb-4">
+          {/* Navigation Arrows */}
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <button
+              onClick={() => paginate(-1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:scale-100"
+              style={{ 
+                backgroundColor: 'var(--bg-card)',
+                border: '2px solid var(--border-primary)',
+                color: 'var(--text-primary)'
+              }}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex gap-2">
+              {ProjectsList.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setDirection(index > activeProject ? 1 : -1);
+                    setActiveProject(index);
+                  }}
+                  className="h-2 rounded-full transition-all"
+                  style={{
+                    width: activeProject === index ? '32px' : '8px',
+                    backgroundColor: activeProject === index ? 'var(--accent-primary)' : 'var(--border-secondary)',
+                  }}
+                  aria-label={`Go to project ${index + 1}`}
+                />
+              ))}
             </div>
+
+            <button
+              onClick={() => paginate(1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full shadow-lg transition-all hover:scale-110 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:scale-100"
+              style={{ 
+                backgroundColor: 'var(--bg-card)',
+                border: '2px solid var(--border-primary)',
+                color: 'var(--text-primary)'
+              }}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
-        ),
-      )}
+
+          {/* Projects Carousel */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <m.div
+                key={activeProject}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "tween", duration: 0.35, ease: "easeInOut" },
+                  opacity: { duration: 0.25 },
+                  scale: { duration: 0.25 },
+                }}
+                className="w-full px-4"
+              >
+                <div
+                  className="group overflow-hidden rounded-2xl shadow-2xl"
+                  style={{ 
+                    backgroundColor: 'var(--bg-card)',
+                    border: '1px solid var(--border-primary)'
+                  }}
+                >
+                  <div className="grid gap-8 lg:grid-cols-2">
+                    {/* Image Section */}
+                    <div className="relative h-72 overflow-hidden sm:h-96 lg:h-[500px]">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                      {project.img.map((img, imgIndex) => (
+                        <m.img
+                          key={imgIndex}
+                          initial={{ opacity: 0, scale: 1.1 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.6, delay: imgIndex * 0.1 }}
+                          src={img}
+                          alt={`${project.name} screenshot ${imgIndex + 1}`}
+                          className={cn(
+                            "absolute object-cover transition-all duration-700 group-hover:scale-105",
+                            imgIndex === 0 && "left-0 h-full w-[70%] rounded-r-2xl shadow-2xl",
+                            imgIndex === 1 && "right-4 bottom-4 h-[60%] w-[40%] rounded-xl shadow-xl",
+                            imgIndex === 2 && "right-8 bottom-8 h-[50%] w-[32%] rounded-lg shadow-lg",
+                          )}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="flex max-h-[420px] flex-col justify-center p-6 sm:max-h-[460px] sm:p-8 lg:max-h-none lg:p-12">
+                      <m.h2 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="mb-4 text-3xl font-bold lg:text-4xl"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {project.name}
+                      </m.h2>
+
+                      <m.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="mb-4 text-base leading-relaxed text-secondary line-clamp-4-md sm:mb-6 sm:text-lg"
+                      >
+                        {project.description}
+                      </m.p>
+
+                      {/* Tech Stack */}
+                      <m.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        className="mb-6"
+                      >
+                        <h3 
+                          className="mb-3 text-sm font-semibold uppercase tracking-wide"
+                          style={{ color: 'var(--text-tertiary)' }}
+                        >
+                          Technologies
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((t, techIndex) => (
+                            <m.span
+                              key={t}
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.3, delay: 0.5 + techIndex * 0.05 }}
+                              whileHover={{ scale: 1.1, y: -2 }}
+                              className="rounded-lg px-3 py-1.5 text-sm font-medium shadow-sm transition-all"
+                              style={{ 
+                                backgroundColor: 'var(--bg-hover)',
+                                color: 'var(--accent-primary)',
+                                border: '1px solid var(--border-secondary)'
+                              }}
+                            >
+                              {t}
+                            </m.span>
+                          ))}
+                        </div>
+                      </m.div>
+
+                      {/* Action Buttons */}
+                      <m.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                        className="flex flex-wrap gap-3"
+                      >
+                        {project.demo && (
+                          <a href={project.demo} target="_blank" rel="noreferrer">
+                            <Button name="Live Demo" />
+                          </a>
+                        )}
+                        {project.link && (
+                          <a href={project.link} target="_blank" rel="noreferrer">
+                            <Button name="View Code" />
+                          </a>
+                        )}
+                        {project.backendLink && (
+                          <a href={project.backendLink} target="_blank" rel="noreferrer">
+                            <Button name="Backend" />
+                          </a>
+                        )}
+                      </m.div>
+                    </div>
+                  </div>
+                </div>
+              </m.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

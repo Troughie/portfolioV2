@@ -4,26 +4,42 @@ interface props {
   isTextArea?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
 }
+
 const Input = ({ isTextArea = false, name, required, onChange }: props) => {
   return (
-    <div className="relative my-5 flex w-full flex-col md:w-1/2">
+    <div className="relative my-4 flex w-full flex-col">
+      <label
+        htmlFor={name}
+        className="mb-2 text-sm font-semibold uppercase"
+        style={{
+          color: 'var(--text-secondary)',
+        }}
+      >
+        {name}
+      </label>
       {isTextArea ? (
         <textarea
-          className="peer border-b border-[#707070] focus:ring-0 focus:outline-none"
+          className="rounded-lg border-2 px-4 py-3 transition-all duration-300 focus:border-[var(--accent-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+          style={{
+            backgroundColor: 'var(--bg-secondary)',
+            borderColor: 'var(--border-primary)',
+            color: 'var(--text-primary)',
+          }}
           id={name}
           required={required}
           name={name}
+          placeholder={`Enter your ${name}...`}
           title="Please let me know what you would like."
-          rows={2}
+          rows={4}
           onChange={(e) => onChange && onChange(e)}
-          cols={10}
         ></textarea>
       ) : (
         <input
-          type="text"
+          type={name === "email" ? "email" : "text"}
           name={name}
           required={required}
           autoComplete="off"
+          placeholder={`Enter your ${name}...`}
           onChange={(e) => onChange && onChange(e)}
           pattern={
             name === "email"
@@ -31,16 +47,14 @@ const Input = ({ isTextArea = false, name, required, onChange }: props) => {
               : undefined
           }
           title={name === "email" ? "(example@gmail.com)" : ""}
-          className="peer border-b border-[#707070] focus:ring-0 focus:outline-none"
+          className="rounded-lg border-2 px-4 py-3 transition-all duration-300 focus:border-[var(--accent-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+          style={{
+            backgroundColor: 'var(--bg-secondary)',
+            borderColor: 'var(--border-primary)',
+            color: 'var(--text-primary)',
+          }}
         />
       )}
-      <label
-        htmlFor={name}
-        className="peer-focus:text-primary absolute -top-3 -translate-y-1/2 font-sans font-bold text-gray-500 uppercase transition-all duration-700 peer-placeholder-shown:top-1/2 peer-placeholder-shown:scale-75 peer-focus:-top-4 peer-focus:-left-1 peer-focus:scale-75 peer-focus:duration-700"
-      >
-        {name}
-      </label>
-      <div className="bg-primary h-[1px] w-0 -translate-y-0.5 duration-700 peer-focus:w-full"></div>
     </div>
   );
 };

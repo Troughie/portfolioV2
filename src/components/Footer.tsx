@@ -1,10 +1,13 @@
 import { ReactNode } from "react";
 import { Facebook, Github, Linkedin, Mail } from "../assets/icons";
+import { motion as m } from "framer-motion";
+
 interface props {
   name: string;
   link: string;
   icon: ReactNode;
 }
+
 const Footer = () => {
   const FooterItem: props[] = [
     {
@@ -28,23 +31,53 @@ const Footer = () => {
       link: "https://www.facebook.com/Ntngoc2906/",
     },
   ];
+
   return (
-    <div className="mt-10 flex h-auto w-screen flex-col bg-gradient-to-tr from-[#00b7c7] to-[#4d0ce8]">
-      <div className="flex items-center justify-center gap-6 py-8">
-        {FooterItem.map(({ icon, link, name }) => (
-          <a
-            key={name}
-            target="_blank"
-            rel="noreferrer noopener"
-            href={name === "mail" ? "mailto:" + link : link}
-            className="relative size-6 cursor-pointer duration-300 hover:-translate-y-1.5 hover:scale-[1.1]"
-          >
-            {icon}
-          </a>
-        ))}
+    <footer 
+      className="mt-20 w-full py-12"
+      style={{ 
+        background: 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%)',
+      }}
+    >
+      <div className="mx-auto max-w-6xl px-4">
+        {/* Social Links */}
+        <div className="mb-8 flex items-center justify-center gap-6">
+          {FooterItem.map(({ icon, link, name }, index) => (
+            <m.a
+              key={name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              target="_blank"
+              rel="noreferrer noopener"
+              href={name === "mail" ? "mailto:" + link : link}
+              className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
+              whileHover={{ y: -5 }}
+            >
+              {icon}
+            </m.a>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="mx-auto mb-6 h-px w-48 bg-white/20"></div>
+
+        {/* Copyright */}
+        <m.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center"
+        >
+          <p className="text-sm text-white/90">
+            © {new Date().getFullYear()} Ngoc Nguyen. All rights reserved.
+          </p>
+          <p className="mt-2 text-xs text-white/70">
+            Built with React, TypeScript & TailwindCSS
+          </p>
+        </m.div>
       </div>
-      <span className="py-5 text-center">© Ngoc Nguyen 2025</span>
-    </div>
+    </footer>
   );
 };
 

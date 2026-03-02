@@ -1,4 +1,5 @@
 import cn from "../ultils";
+import { motion as m } from "framer-motion";
 
 interface props {
   name: string;
@@ -6,6 +7,7 @@ interface props {
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
 }
+
 const Button = ({
   name,
   className,
@@ -13,16 +15,36 @@ const Button = ({
   disabled = false,
 }: props) => {
   return (
-    <button
+    <m.button
       type={type}
+      whileHover={{ scale: disabled ? 1 : 1.05 }}
+      whileTap={{ scale: disabled ? 1 : 0.95 }}
       className={cn(
-        `cursor-pointer rounded-sm border-2 border-[#00b7c7] px-2 py-1 font-sans text-[14px] font-medium text-[#00b7c7] uppercase duration-300 hover:bg-[#00b7c7] hover:text-white`,
+        `relative overflow-hidden rounded-lg px-6 py-2.5 font-medium uppercase tracking-wide transition-all duration-300`,
+        disabled 
+          ? "cursor-not-allowed opacity-40" 
+          : "cursor-pointer shadow-md hover:shadow-lg",
         className,
-        disabled && "pointer-events-none cursor-default opacity-40 select-none",
       )}
+      style={{
+        background: disabled 
+          ? 'var(--bg-tertiary)' 
+          : 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%)',
+        color: '#FFFFFF',
+        border: 'none',
+      }}
+      disabled={disabled}
     >
-      {name}
-    </button>
+      <span className="relative z-10">{name}</span>
+      {!disabled && (
+        <m.div
+          className="absolute inset-0 bg-white"
+          initial={{ scale: 0, opacity: 0 }}
+          whileHover={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+    </m.button>
   );
 };
 
