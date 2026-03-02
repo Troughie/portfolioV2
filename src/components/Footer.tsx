@@ -34,48 +34,61 @@ const Footer = () => {
 
   return (
     <footer 
-      className="mt-20 w-full py-12"
+      className="mt-16 w-full border-t"
       style={{ 
-        background: 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%)',
+        backgroundColor: 'var(--bg-primary)',
+        borderColor: 'var(--border-primary)',
       }}
     >
-      <div className="mx-auto max-w-6xl px-4">
-        {/* Social Links */}
-        <div className="mb-8 flex items-center justify-center gap-6">
-          {FooterItem.map(({ icon, link, name }, index) => (
-            <m.a
-              key={name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              target="_blank"
-              rel="noreferrer noopener"
-              href={name === "mail" ? "mailto:" + link : link}
-              className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
-              whileHover={{ y: -5 }}
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          {/* Left: text */}
+          <m.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center sm:text-left"
+          >
+            <p
+              className="text-sm font-medium"
+              style={{ color: 'var(--text-primary)' }}
             >
-              {icon}
-            </m.a>
-          ))}
+              © {new Date().getFullYear()} Ngoc Nguyen
+            </p>
+            <p
+              className="mt-1 text-xs"
+              style={{ color: 'var(--text-tertiary)' }}
+            >
+              Built with React, TypeScript & TailwindCSS
+            </p>
+          </m.div>
+
+          {/* Right: social links */}
+          <div className="flex items-center gap-4">
+            {FooterItem.map(({ icon, link, name }, index) => (
+              <m.a
+                key={name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                target="_blank"
+                rel="noreferrer noopener"
+                href={name === "mail" ? "mailto:" + link : link}
+                className="group relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent-primary)] sm:h-11 sm:w-11"
+                style={{ 
+                  borderColor: 'var(--border-primary)',
+                  backgroundColor: 'var(--bg-secondary)',
+                  color: 'var(--text-primary)',
+                }}
+                whileHover={{ y: -3 }}
+              >
+                <span className="transition-colors group-hover:text-[var(--accent-primary)]">
+                  {icon}
+                </span>
+              </m.a>
+            ))}
+          </div>
         </div>
-
-        {/* Divider */}
-        <div className="mx-auto mb-6 h-px w-48 bg-white/20"></div>
-
-        {/* Copyright */}
-        <m.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center"
-        >
-          <p className="text-sm text-white/90">
-            © {new Date().getFullYear()} Ngoc Nguyen. All rights reserved.
-          </p>
-          <p className="mt-2 text-xs text-white/70">
-            Built with React, TypeScript & TailwindCSS
-          </p>
-        </m.div>
       </div>
     </footer>
   );
