@@ -74,7 +74,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noreferrer noopener"
                 href={name === "mail" ? "mailto:" + link : link}
-                className="group relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent-primary)] sm:h-11 sm:w-11"
+                className="group relative flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-sm transition-[border-color,background-color] duration-150 sm:h-11 sm:w-11"
                 style={{ 
                   borderColor: 'var(--border-primary)',
                   backgroundColor: 'var(--bg-secondary)',

@@ -1,5 +1,4 @@
 import { AnimatePresence } from "framer-motion";
-import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import About from "./components/About";
@@ -24,17 +23,15 @@ function App() {
     Skills: useRef<HTMLElement | null>(null),
     Experiences: useRef<HTMLElement | null>(null),
     Projects: useRef<HTMLElement | null>(null),
-    Contact: useRef<HTMLElement | null>(null),
     More: useRef<HTMLElement | null>(null),
   };
 
   const { setName } = useViewActive();
   const { isLoading } = useIsLoading();
   const [currentSection, setCurrentSection] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const sectionIds = ["Intro", "About", "Skills", "Experiences", "Projects", "Contact", "More"];
+  const sectionIds = ["Intro", "About", "Skills", "Experiences", "Projects", "More"];
 
   useEffect(() => {
     const observerOptions = {
@@ -72,78 +69,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Smooth section scrolling (desktop only)
-  useEffect(() => {
-    // Chỉ áp dụng full-page scroll trên màn hình lớn + thiết bị có chuột
-    const isDesktop =
-      typeof window !== "undefined" &&
-      window.innerWidth >= 1024 &&
-      window.matchMedia &&
-      window.matchMedia("(pointer: fine)").matches;
 
-    if (!isDesktop) return;
-
-    let scrollTimeout: ReturnType<typeof setTimeout>;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (isScrolling) return;
-
-      const target = e.target as HTMLElement | null;
-
-      // Nếu đang tương tác trong form / input / textarea / select / button thì không can thiệp,
-      // để user có thể scroll nội dung form bình thường.
-      if (
-        target &&
-        target.closest("form, input, textarea, select, button, [data-scroll-lock='false']")
-      ) {
-        return;
-      }
-
-      const direction = e.deltaY > 0 ? 1 : -1;
-      const nextSection = currentSection + direction;
-
-      // Nếu đã ở đầu hoặc cuối danh sách section thì cho phép scroll tự nhiên (không preventDefault)
-      if (nextSection < 0 || nextSection >= sectionIds.length) {
-        return;
-      }
-
-      e.preventDefault();
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (isScrolling) return;
-
-        const safeNextSection = currentSection + direction;
-        if (safeNextSection < 0 || safeNextSection >= sectionIds.length) return;
-
-        setIsScrolling(true);
-        const targetSection = document.getElementById(sectionIds[safeNextSection]);
-
-        if (targetSection) {
-          targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
-          setCurrentSection(safeNextSection);
-
-          setTimeout(() => {
-            setIsScrolling(false);
-          }, 800);
-        } else {
-          setIsScrolling(false);
-        }
-      }, 80);
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("wheel", handleWheel, { passive: false });
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("wheel", handleWheel);
-      }
-      clearTimeout(scrollTimeout);
-    };
-  }, [currentSection, isScrolling, sectionIds]);
 
   return (
     <ThemeProvider>
@@ -188,13 +114,7 @@ function App() {
           >
             <Projects />
           </section>
-          <section
-            className="scroll-section"
-            id="Contact"
-            ref={sections.Contact}
-          >
-            <Contact />
-          </section>
+
           <section
             className="scroll-section"
             id="More"

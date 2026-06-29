@@ -22,8 +22,10 @@ const Navbar = ({ scrolled }: props) => {
         )}
       >
         <div className="flex items-center gap-2">
-          <img src="" alt="" className="size-20 rounded-full bg-white" />
-          <span>Tngoc</span>
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-accent-primary to-accent-secondary flex items-center justify-center font-bold text-white text-xs shadow-md">
+            TN
+          </div>
+          <span className="font-bold text-sm tracking-wide" style={{ color: "var(--text-primary)" }}>Tngoc</span>
         </div>
         {NavbarDesktop(showNav, setShowNav)}
       </m.div>

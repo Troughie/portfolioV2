@@ -14,7 +14,7 @@ const BoxLink = ({ link, icon, name }: props) => {
       target="_blank"
       rel="noreferrer noopener"
       whileHover={{ y: -4 }}
-      className="group relative flex w-full cursor-pointer items-stretch overflow-hidden rounded-2xl border shadow-xl transition-all duration-300"
+      className="group relative flex w-full cursor-pointer items-stretch overflow-hidden rounded-2xl border shadow-xl transition-[border-color,background-color] duration-200"
       style={{
         borderColor: "var(--border-primary)",
         background:

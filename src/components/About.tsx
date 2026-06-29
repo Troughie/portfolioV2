@@ -1,26 +1,6 @@
-import { ReactNode, useRef } from "react";
-import { animateSlowLoad } from "../Constant";
+import { useRef } from "react";
 import { motion as m, useInView } from "framer-motion";
 import { Mail, Phone } from "../assets/icons";
-
-interface props {
-  name: string;
-  id: number;
-  icon: ReactNode;
-}
-
-const socialList: props[] = [
-  {
-    name: "0383618054",
-    icon: <Phone className="size-5" />,
-    id: 1,
-  },
-  {
-    name: "ngocnguyen29061@gmail.com",
-    icon: <Mail className="size-5" />,
-    id: 2,
-  },
-];
 
 const About = () => {
   const ref = useRef(null);
@@ -29,175 +9,178 @@ const About = () => {
   return (
     <div 
       id="About" 
-      className="relative flex min-h-screen w-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen w-full items-center justify-center px-6 py-16 sm:px-8 lg:px-12"
     >
-      <div ref={ref} className="mx-auto w-full max-w-6xl">
-        {/* Header */}
+      <div ref={ref} className="mx-auto w-full max-w-7xl">
+        {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-8 text-center"
+          className="mb-12 text-center lg:text-left"
         >
-          <h1 
-            className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl"
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-accent">// Profile</span>
+          <h2 
+            className="mt-2 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: 'var(--text-primary)' }}
           >
             About Me
-          </h1>
-          <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary"></div>
+          </h2>
+          <div className="mt-4 h-[3px] w-20 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary lg:hidden"></div>
         </m.div>
 
-        {/* Content Grid */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* Left Column - Quote & Info */}
+        {/* Content Layout */}
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+          {/* Left Column: Profile Card & Stats (5 cols) */}
           <m.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col justify-center gap-8"
+            className="lg:col-span-5 space-y-8"
           >
-            {/* Quote Card */}
+            {/* Developer Metadata Card */}
             <div 
-              className="rounded-2xl p-8 shadow-xl"
-              style={{ 
-                backgroundColor: 'var(--bg-card)',
-                border: '1px solid var(--border-primary)'
-              }}
+              className="relative overflow-hidden rounded-2xl border border-primary p-6 shadow-xl bg-card"
             >
-              <div className="mb-4 text-6xl" style={{ color: 'var(--accent-primary)' }}>
-                "
-              </div>
-              <p 
-                className="text-xl font-semibold italic leading-relaxed sm:text-2xl"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                The greatest ideas are the simplest
-              </p>
-              <div className="mt-4 text-right text-6xl" style={{ color: 'var(--accent-primary)' }}>
-                "
+              {/* Card Dotted Tech Background */}
+              <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{
+                  backgroundImage: "radial-gradient(var(--text-primary) 1px, transparent 0)",
+                  backgroundSize: "16px 16px"
+                }}
+              />
+              
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-accent-primary to-accent-secondary p-0.5 shadow-md flex items-center justify-center text-white text-2xl font-black">
+                    NN
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Nguyen Tien Ngoc</h3>
+                    <p className="text-xs font-semibold tracking-wider uppercase text-accent">Full Stack Engineer</p>
+                  </div>
+                </div>
+
+                <div className="border-t border-primary pt-4 space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span style={{ color: 'var(--text-tertiary)' }}>Location</span>
+                    <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>Bien Hoa, Dong Nai, Vietnam</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: 'var(--text-tertiary)' }}>Tech Focus</span>
+                    <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>React, NestJS, TypeScript</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span style={{ color: 'var(--text-tertiary)' }}>Status</span>
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                      Open for opportunities
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Contact Info */}
-            <div 
-              className="rounded-2xl p-6 shadow-lg"
-              style={{ 
-                backgroundColor: 'var(--bg-secondary)',
-                border: '1px solid var(--border-primary)'
-              }}
-            >
-              <h3 
-                className="mb-4 text-lg font-semibold uppercase tracking-wide"
-                style={{ color: 'var(--text-tertiary)' }}
+            {/* Statistics Section */}
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { count: "1", label: "Year Exp", color: "var(--accent-primary)" },
+                { count: "10+", label: "Projects", color: "var(--accent-secondary)" },
+                { count: "8+", label: "Tech Stack", color: "var(--accent-tertiary)" },
+              ].map((stat, idx) => (
+                <div 
+                  key={idx}
+                  className="rounded-xl border border-primary p-4 text-center shadow-md bg-card transition-all hover:border-accent-primary/50"
+                >
+                  <div 
+                    className="text-2xl font-black sm:text-3xl"
+                    style={{ color: stat.color }}
+                  >
+                    {stat.count}
+                  </div>
+                  <div 
+                    className="mt-1 text-[11px] font-bold uppercase tracking-wider"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Direct Contact Buttons */}
+            <div className="space-y-3">
+              <a
+                href="mailto:ngocnguyen29061@gmail.com"
+                className="flex items-center justify-between rounded-xl border border-primary p-4 bg-card hover:bg-hover hover:border-accent-primary transition-all duration-200 shadow-sm"
               >
-                Get In Touch
-              </h3>
-              <ul className="space-y-4">
-                {socialList.map(({ id, name, icon }) => {
-                  const hrf = id === 2 ? `mailto:${name}` : `tel:${name}`;
-                  return (
-                    <m.li
-                      {...animateSlowLoad(id)}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      key={id}
-                    >
-                      <a
-                        href={hrf}
-                        className="group flex items-center gap-3 transition-all hover:translate-x-2"
-                        style={{ color: 'var(--text-secondary)' }}
-                      >
-                        <div 
-                          className="rounded-lg p-2"
-                          style={{ backgroundColor: 'var(--bg-hover)' }}
-                        >
-                          {icon}
-                        </div>
-                        <span 
-                          className="font-medium transition-colors"
-                          style={{ color: 'var(--text-primary)' }}
-                        >
-                          {name}
-                        </span>
-                      </a>
-                    </m.li>
-                  );
-                })}
-              </ul>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-lg p-2 bg-accent-primary/10" style={{ color: 'var(--accent-primary)' }}>
+                    <Mail className="size-5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Email Me</div>
+                    <div className="text-xs sm:text-sm font-semibold font-mono" style={{ color: 'var(--text-primary)' }}>ngocnguyen29061@gmail.com</div>
+                  </div>
+                </div>
+                <svg className="h-4 w-4" style={{ color: 'var(--text-tertiary)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              <a
+                href="tel:0364932286"
+                className="flex items-center justify-between rounded-xl border border-primary p-4 bg-card hover:bg-hover hover:border-accent-secondary transition-all duration-200 shadow-sm"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="rounded-lg p-2 bg-accent-secondary/10" style={{ color: 'var(--accent-secondary)' }}>
+                    <Phone className="size-5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Call Me</div>
+                    <div className="text-xs sm:text-sm font-semibold font-mono" style={{ color: 'var(--text-primary)' }}>0364932286</div>
+                  </div>
+                </div>
+                <svg className="h-4 w-4" style={{ color: 'var(--text-tertiary)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </m.div>
 
-          {/* Right Column - Description */}
+          {/* Right Column: Bio Narrative (7 cols) */}
           <m.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col justify-center"
+            className="lg:col-span-7 flex flex-col justify-center space-y-6 text-sm sm:text-base leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
           >
-            <div 
-              className="space-y-4 rounded-2xl p-6 text-sm leading-relaxed shadow-xl sm:space-y-6 sm:p-8 sm:text-lg"
-              style={{ 
-                color: 'var(--text-secondary)',
-              }}
-            >
+            <div>
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                Building optimized, reliable software solutions
+              </h3>
               <p>
-                Hello! I am a <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Software Engineer</span> with one year of experience in software development. I am proficient in both backend and frontend development, specializing in <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>ReactJs</span> and <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Node.js (ExpressJs)</span>.
+                Hello! I am a passionate <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Software Engineer</span> with hands-on experience designing and implementing full-stack software. I specialize in crafting performant interfaces using <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>React.js</span> and scalable REST services with <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Node.js / NestJS / Express.js</span>.
               </p>
-              
-              {/* Hidden on very small screens to keep section short */}
-              <p className="hidden sm:block">
-                I am passionate about building efficient applications with optimized performance and great user experiences. I have developed various real-world projects, including restaurant management systems, e-commerce platforms, financial management applications, and real-time chat features.
-              </p>
-              
-              <p className="hidden sm:block">
-                Always eager to learn new technologies, I strive to work in a challenging and creative environment to enhance my skills. If you're looking for a dedicated and responsible developer, feel free to reach out to me!
-              </p>
+            </div>
 
-              {/* Stats */}
-              <div className="mt-6 grid grid-cols-3 gap-4 border-t pt-4 sm:mt-8 sm:pt-6" style={{ borderColor: 'var(--border-primary)' }}>
-                <div className="text-center">
-                  <div 
-                    className="text-3xl font-bold"
-                    style={{ color: 'var(--accent-primary)' }}
-                  >
-                    1+
-                  </div>
-                  <div 
-                    className="mt-1 text-sm"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
-                    Years Exp
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div 
-                    className="text-3xl font-bold"
-                    style={{ color: 'var(--accent-secondary)' }}
-                  >
-                    10+
-                  </div>
-                  <div 
-                    className="mt-1 text-sm"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
-                    Projects
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div 
-                    className="text-3xl font-bold"
-                    style={{ color: 'var(--accent-tertiary)' }}
-                  >
-                    8+
-                  </div>
-                  <div 
-                    className="mt-1 text-sm"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
-                    Technologies
-                  </div>
-                </div>
-              </div>
+            <div>
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                My Engineering Philosophy
+              </h3>
+              <p>
+                I thrive on solving complex issues by breaking them down into simple, clean, and maintainable architectures. Over the past year, I have successfully built and deployed tools ranging from ecommerce systems to real-time chat servers and financial expense monitors, focusing on system reliability, responsiveness, and performance optimization.
+              </p>
+            </div>
+
+            <div className="hidden sm:block">
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
+                Always Eager to Grow
+              </h3>
+              <p>
+                I actively pursue new tech stacks, methodologies, and engineering principles. I strive to contribute to challenging, modern product developments that value code quality, micro-interactions, and visual precision.
+              </p>
             </div>
           </m.div>
         </div>
