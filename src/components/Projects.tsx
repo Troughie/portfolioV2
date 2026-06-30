@@ -15,6 +15,8 @@ import {
   PLarge,
   PMedium,
   PSmall,
+  EXLarge,
+  EXSmall
 } from "../assets";
 
 interface ProjectProps {
@@ -44,7 +46,7 @@ const Projects = () => {
         "JavaScript",
         "Chrome Extension"
       ],
-      img: [],
+      img: [EXLarge, EXSmall],
       link: "https://github.com/Troughie",
     },
     {
@@ -137,7 +139,7 @@ const Projects = () => {
   const currentProject = ProjectsList[activeIdx];
 
   return (
-    <div 
+    <div
       ref={ref}
       className="flex min-h-screen w-full items-center justify-center px-6 py-12 sm:px-8 lg:px-12"
     >
@@ -150,7 +152,7 @@ const Projects = () => {
           className="mb-8 text-center lg:text-left"
         >
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-accent">// Showcase</span>
-          <h2 
+          <h2
             className="mt-2 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: 'var(--text-primary)' }}
           >
@@ -161,9 +163,9 @@ const Projects = () => {
 
         {/* Split Layout Container */}
         <div className="grid gap-6 lg:grid-cols-12 items-stretch max-h-none lg:max-h-[60vh]">
-          
+
           {/* Left Column: Interactive Project Selector List (3 cols) */}
-          <div 
+          <div
             className="lg:col-span-3 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto pb-4 lg:pb-0 pr-0 lg:pr-3 max-h-[120px] lg:max-h-none"
             data-scroll-lock="false"
           >
@@ -175,8 +177,8 @@ const Projects = () => {
                   onClick={() => setActiveIdx(idx)}
                   className={cn(
                     "flex flex-col text-left p-4 rounded-xl border transition-all duration-200 cursor-pointer min-w-[200px] lg:min-w-0 flex-shrink-0 lg:flex-shrink",
-                    isActive 
-                      ? "border-accent-primary bg-hover shadow-md font-bold" 
+                    isActive
+                      ? "border-accent-primary bg-hover shadow-md font-bold"
                       : "border-primary bg-card hover:bg-hover/50"
                   )}
                   whileHover={{ x: isActive ? 0 : 3 }}
@@ -184,7 +186,7 @@ const Projects = () => {
                   <h3 className="text-sm font-bold truncate" style={{ color: isActive ? 'var(--accent-primary)' : 'var(--text-primary)' }}>
                     {project.name}
                   </h3>
-                  
+
                   <div className="hidden lg:flex flex-wrap gap-1 mt-2">
                     {project.tech.slice(0, 3).map((t) => (
                       <span key={t} className="text-[9px] font-bold px-1.5 py-0.5 rounded border border-primary bg-secondary/40 text-tertiary uppercase">
@@ -260,7 +262,7 @@ const Projects = () => {
                       <div className="mb-4">
                         <div className="flex flex-wrap gap-1.5">
                           {currentProject.tech.map((t) => (
-                            <span 
+                            <span
                               key={t}
                               className="text-[9px] font-bold px-2 py-0.5 rounded border border-primary text-accent bg-secondary/20"
                             >

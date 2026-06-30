@@ -17,3 +17,5 @@ export { default as CSmall } from "./img/cake-small.png";
 export { default as PLarge } from "./img/portfolio-large.png";
 export { default as PMedium } from "./img/portfolio-medium.png";
 export { default as PSmall } from "./img/portfolio-small.png";
+export { default as EXLarge } from "./img/extension-tran.png";
+export { default as EXSmall } from "./img/exention-popup.png";
