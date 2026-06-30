@@ -33,6 +33,7 @@ const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [activeIdx, setActiveIdx] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const ProjectsList: ProjectProps[] = [
     {
@@ -221,6 +222,7 @@ const Projects = () => {
                           animate={{ opacity: 1, scale: 1, transition: { duration: 0.4, delay: imgIndex * 0.08 } }}
                           whileHover={{ scale: 1.08, zIndex: 10, transition: { duration: 0.2 } }}
                           src={img}
+                          onClick={() => setSelectedImage(img)}
                           alt={`${currentProject.name} screenshot ${imgIndex + 1}`}
                           className={cn(
                             "absolute object-cover cursor-zoom-in",
@@ -299,6 +301,40 @@ const Projects = () => {
 
         </div>
       </div>
+
+      {/* Lightbox Modal for screenshot full view */}
+      <AnimatePresence>
+        {selectedImage && (
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-4 cursor-zoom-out"
+          >
+            <m.img
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              src={selectedImage}
+              alt="Enlarged project screenshot"
+              className="max-w-[95vw] max-h-[85vh] rounded-2xl object-contain shadow-2xl border border-primary pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            />
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 rounded-full p-2.5 bg-black/50 text-white hover:bg-black/80 border border-white/10 transition-colors shadow-lg"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </m.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

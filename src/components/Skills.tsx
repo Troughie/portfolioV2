@@ -27,7 +27,7 @@ const Skills = () => {
     },
     {
       title: "AI & Generative",
-      skills: ["Text-to-Video (VEO 3/Kling/Sora)", "Prompt Engineering", "JSON Schema", "Gemini Nano (LLM)", "AI Workflow Automation"],
+      skills: ["Text-to-Video (VEO 3/Kling/Sora)", "Prompt Engineering", "AI Workflow Automation", "API Integration with AI Models", "AI-assisted Programming", "LLM Application Development"],
       color: "#10b981",
       icon: <Setting className="h-5 w-5" style={{ color: "#10b981" }} />
     },
@@ -40,7 +40,7 @@ const Skills = () => {
   ];
 
   return (
-    <div 
+    <div
       className="flex min-h-screen w-full items-center justify-center px-6 py-12 sm:px-8 lg:px-12"
     >
       <div ref={ref} className="mx-auto w-full max-w-7xl">
@@ -52,7 +52,7 @@ const Skills = () => {
           className="mb-10 text-center"
         >
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-accent">// Capability</span>
-          <h2 
+          <h2
             className="mt-2 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
             style={{ color: 'var(--text-primary)' }}
           >
@@ -92,7 +92,7 @@ const Skills = () => {
                       key={skill}
                       whileHover={{ y: -2, borderColor: category.color }}
                       className="px-3 py-1.5 rounded-xl border border-primary text-xs font-semibold transition-all hover:bg-hover shadow-sm"
-                      style={{ 
+                      style={{
                         color: 'var(--text-primary)',
                         backgroundColor: 'var(--bg-secondary)'
                       }}
