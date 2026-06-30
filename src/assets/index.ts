@@ -19,3 +19,4 @@ export { default as PMedium } from "./img/portfolio-medium.png";
 export { default as PSmall } from "./img/portfolio-small.png";
 export { default as EXLarge } from "./img/extension-tran.png";
 export { default as EXSmall } from "./img/exention-popup.png";
+export { default as McLarge } from "./img/macroDesk-large.png";

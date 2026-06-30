@@ -16,7 +16,7 @@ import {
   PMedium,
   PSmall,
   EXLarge,
-  EXSmall
+  EXSmall, McLarge
 } from "../assets";
 
 interface ProjectProps {
@@ -61,7 +61,7 @@ const Projects = () => {
         "Framer Motion",
         "C#"
       ],
-      img: [],
+      img: [McLarge],
       link: "https://github.com/Troughie",
     },
     {
