@@ -218,12 +218,12 @@ const Projects = () => {
                         <m.img
                           key={imgIndex}
                           initial={{ opacity: 0, scale: 1.05 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.4, delay: imgIndex * 0.08 }}
+                          animate={{ opacity: 1, scale: 1, transition: { duration: 0.4, delay: imgIndex * 0.08 } }}
+                          whileHover={{ scale: 1.08, zIndex: 10, transition: { duration: 0.2 } }}
                           src={img}
                           alt={`${currentProject.name} screenshot ${imgIndex + 1}`}
                           className={cn(
-                            "absolute object-cover transition-transform duration-500",
+                            "absolute object-cover cursor-zoom-in",
                             imgIndex === 0 && "left-0 h-full w-[70%] rounded-r-xl shadow-md border-r border-primary",
                             imgIndex === 1 && "right-3 bottom-3 h-[60%] w-[40%] rounded-lg shadow-sm border border-primary",
                             imgIndex === 2 && "right-6 bottom-6 h-[50%] w-[32%] rounded-md shadow-xs border border-primary",
